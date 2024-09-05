@@ -2,9 +2,7 @@ name: Sanitize comment
 
 on:
   issue_comment:
-    types:
-      - created
-      - edited
+    types: [created, edited]
 
 permissions:
   issues: write
@@ -12,7 +10,7 @@ permissions:
 jobs:
   sanitize-comment:
     name: Sanitize comment
-    if: vars.SANITIZE_COMMENT
+    if: vars.SANITIZE_COMMENT && !github.event.issue.pull_request
     runs-on: ubuntu-latest
     steps:
       - name: Sanitize comment
