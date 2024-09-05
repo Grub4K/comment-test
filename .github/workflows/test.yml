@@ -1,15 +1,19 @@
-name: Edit spammy Issue Comments
+name: Sanitize comment
 
 on:
   issue_comment:
-    types: [created, edited]
+    types:
+      - created
+      - edited
 
 permissions:
   issues: write
 
 jobs:
-  comment-filter:
+  sanitize-comment:
+    name: Sanitize comment
+    if: vars.SANITIZE_COMMENT
     runs-on: ubuntu-latest
     steps:
-    - name: Comment filter
-      uses: Grub4K/comment-edit@v1
+      - name: Sanitize comment
+        uses: yt-dlp/sanitize-comment@v1
